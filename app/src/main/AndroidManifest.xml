@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.car_shop">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +13,12 @@
         android:theme="@style/Theme.CarShop">
         <activity
             android:name=".MainActivity"
+            android:exported="false"
+            >
+
+        </activity>
+        <activity
+            android:name=".RegisterLoginActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
