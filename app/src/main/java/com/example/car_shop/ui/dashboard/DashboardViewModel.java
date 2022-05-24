@@ -36,26 +36,8 @@ public class DashboardViewModel extends ViewModel {
     private void populateList(){
         carDao = appDatabase.carDao();
         carList = new ArrayList<>();
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-        carList.add(new Car("Bugatti", "Veiron", 30000000));
-//        carList.addAll(carDao.getAll());
+//        carDao.insert(new Car("Lamborghini", "Aventador", 4000000));
+        carList.addAll(carDao.getAll());
     }
 
     public LiveData<ArrayList<Car>> getMutableLiveData() {

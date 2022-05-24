@@ -1,16 +1,13 @@
 package com.example.car_shop.ui.dashboard;
 
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.example.car_shop.data.dao.CarDao;
 import com.example.car_shop.data.models.Car;
-import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.CarItemLayoutBinding;
 
 import java.util.ArrayList;
@@ -39,6 +36,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
         holder.binding.brand.setText("Марка: " + car.getBrand());
         holder.binding.model.setText("Модель: " + car.getModel());
         holder.binding.price.setText("Цена: " + car.getPrice() + " сом");
+        holder.binding.carImg.setImageBitmap(BitmapFactory.decodeByteArray(car.getPhoto(), 0, car.getPhoto().length));
     }
 
     @Override

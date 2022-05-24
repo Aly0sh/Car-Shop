@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.example.car_shop.MainActivity;
+import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.LoginFragmentBinding;
 import com.example.car_shop.ui.registerOrLogin.register.RegisterFragment;
 
@@ -33,29 +35,29 @@ public class LoginFragment extends Fragment {
 
         View root = binding.getRoot();
 
+        mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        mViewModel.setDatabase(Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build());
         onClick();
 
         return root;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
     private void onClick(){
         binding.login.setOnClickListener(view -> {
-            String phone = binding.phone.getText().toString();
+            String username = binding.username.getText().toString();
             String password = binding.password.getText().toString();
-            if (phone.isEmpty() || password.isEmpty()){
+            if (username.isEmpty() || password.isEmpty()){
                 Toast.makeText(binding.getRoot().getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
             }
             else {
-                Intent intent = new Intent(requireActivity(), MainActivity.class);
-                Toast.makeText(binding.getRoot().getContext(), "Вы вошли в аккаунт", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+                if(mViewModel.checkUser(username, password))
+                {
+                    Intent intent = new Intent(requireActivity(), MainActivity.class);
+                    Toast.makeText(binding.getRoot().getContext(), "Вы вошли в аккаунт", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(binding.getRoot().getContext(), "Неправильный логин или пароль!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -3,6 +3,8 @@
     package="com.example.car_shop">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
+
 
     <application
         android:allowBackup="true"

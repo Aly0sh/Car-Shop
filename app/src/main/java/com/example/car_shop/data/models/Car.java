@@ -24,10 +24,11 @@ public class Car {
 
     public Car(){}
 
-    public Car(String brand, String model, int price){
+    public Car(String brand, String model, int price, byte[] photo){
         this.brand = brand;
         this.model = model;
         this.price = price;
+        this.photo = photo;
     }
 
     public long getId() {

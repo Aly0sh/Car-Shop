@@ -10,7 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
+import com.example.car_shop.data.models.User;
+import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.RegisterFragmentBinding;
 import com.example.car_shop.ui.registerOrLogin.login.LoginFragment;
 
@@ -29,25 +32,22 @@ public class RegisterFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = RegisterFragmentBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
+        mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+
+        mViewModel.setDatabase(Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build());
 
         onClick();
 
         return root;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
     private void onClick(){
         binding.register.setOnClickListener(view -> {
-            String name = binding.name.getText().toString();
-            String phone = binding.phone.getText().toString();
+            String username = binding.username.getText().toString();
             String password = binding.password.getText().toString();
-            if (name.isEmpty() || phone.isEmpty() || password.isEmpty()){
+            String phone = binding.phone.getText().toString();
+            if (username.isEmpty() || phone.isEmpty() || password.isEmpty()){
                 Toast.makeText(binding.getRoot().getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -55,7 +55,8 @@ public class RegisterFragment extends Fragment {
                     Toast.makeText(binding.getRoot().getContext(), "Пароль должен содержать не менее 6 символов", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(binding.getRoot().getContext(), "Вы зарегестрированы", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(binding.getRoot().getContext(), "Вы зарегистрированы", Toast.LENGTH_LONG).show();
+                    mViewModel.register(new User(username, phone, password));
                     toLoginPage();
                 }
             }
