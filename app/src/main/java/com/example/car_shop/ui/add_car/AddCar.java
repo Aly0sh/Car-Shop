@@ -18,11 +18,13 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.FragmentAddCarBinding;
 import com.example.car_shop.ui.dashboard.DashboardFragment;
+import com.example.car_shop.userService.UserSingl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class AddCar extends Fragment {
     private FragmentAddCarBinding binding;
     private ActivityResultLauncher<String> content;
     private Bitmap bitmap;
+    private boolean isImgSelected = false;
 
 
 
@@ -54,8 +57,10 @@ public class AddCar extends Fragment {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), result);
                     binding.imgSelector.setImageBitmap(bitmap);
+                    isImgSelected = true;
                 } catch (IOException e) {
                     e.printStackTrace();
+                    isImgSelected = false;
                 }
             }
         });
@@ -63,21 +68,32 @@ public class AddCar extends Fragment {
         binding.insert.setOnClickListener(view -> {
             String brand = binding.brand.getText().toString();
             String model = binding.model.getText().toString();
-            int price = Integer.valueOf(binding.price.getText().toString());
-            ByteArrayOutputStream baos=new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-            byte[] img = baos.toByteArray();
-            Car car = new Car(brand, model, price, img);
+            String strPrice = binding.price.getText().toString();
+            if (brand.isEmpty() || model.isEmpty() || strPrice.isEmpty()){
+                Toast.makeText(getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                if (isImgSelected){
+                    ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+                    byte[] img = baos.toByteArray();
 
-            AppDatabase appDatabase = Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build();
-            appDatabase.carDao().insert(car);
+                    int price = Integer.valueOf(strPrice);
+                    Car car = new Car(brand, model, price, img, UserSingl.getUserSingln().getUserId());
+                    AppDatabase appDatabase = Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build();
+                    appDatabase.carDao().insert(car);
 
-            DashboardFragment dashboardFragment = new DashboardFragment();
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(this.getId(), dashboardFragment, "car list")
-                    .addToBackStack(null)
-                    .commit();
+                    DashboardFragment dashboardFragment = new DashboardFragment();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(this.getId(), dashboardFragment, "car list")
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else {
+                    Toast.makeText(getContext(), "Выберите фотку", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
 
         return binding.getRoot();

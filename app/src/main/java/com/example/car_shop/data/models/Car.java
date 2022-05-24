@@ -19,16 +19,20 @@ public class Car {
     @ColumnInfo(name = "price")
     private int price;
 
+    @ColumnInfo(name = "userId")
+    private long userId;
+
     @ColumnInfo(name = "photo", typeAffinity = ColumnInfo.BLOB)
     private byte[] photo;
 
     public Car(){}
 
-    public Car(String brand, String model, int price, byte[] photo){
+    public Car(String brand, String model, int price, byte[] photo, long userId){
         this.brand = brand;
         this.model = model;
         this.price = price;
         this.photo = photo;
+        this.userId = userId;
     }
 
     public long getId() {
@@ -69,5 +73,13 @@ public class Car {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

@@ -41,7 +41,7 @@ public class DashboardFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         CarAdapter carAdapter = new CarAdapter();
         recyclerView.setAdapter(carAdapter);
-        dashboardViewModel.getMutableLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
+        dashboardViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
             @Override
             public void onChanged(ArrayList<Car> cars) {
                 carAdapter.setList(cars);

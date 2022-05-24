@@ -17,6 +17,7 @@ import com.example.car_shop.MainActivity;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.LoginFragmentBinding;
 import com.example.car_shop.ui.registerOrLogin.register.RegisterFragment;
+import com.example.car_shop.userService.UserSingl;
 
 public class LoginFragment extends Fragment {
 
