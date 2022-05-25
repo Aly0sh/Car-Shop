@@ -1,4 +1,4 @@
-package com.example.car_shop.ui.dashboard;
+package com.example.car_shop.ui.mycars;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,34 +11,35 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.example.car_shop.R;
 import com.example.car_shop.data.App;
+import com.example.car_shop.data.enums.UserRoles;
 import com.example.car_shop.data.models.Car;
-import com.example.car_shop.data.room.AppDatabase;
-import com.example.car_shop.databinding.FragmentDashboardBinding;
+import com.example.car_shop.databinding.FragmentMyCarsBinding;
 import com.example.car_shop.ui.add_car.AddCar;
+import com.example.car_shop.ui.cars.CarAdapter;
+import com.example.car_shop.ui.cars.CarsViewModel;
 
 import java.util.ArrayList;
 
-public class DashboardFragment extends Fragment {
-
-    private FragmentDashboardBinding binding;
+public class MyCarsFragment extends Fragment {
+    private FragmentMyCarsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        CarsViewModel dashboardViewModel =
+                new ViewModelProvider(this).get(CarsViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentMyCarsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         dashboardViewModel.setAppDatabase(App.getAppDatabase(getContext()));
 
         RecyclerView recyclerView = binding.carRecycler;
-        recyclerView.setLayoutManager(new GridLayoutManager(binding.getRoot().getContext(), 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         recyclerView.setHasFixedSize(true);
         CarAdapter carAdapter = new CarAdapter();
         recyclerView.setAdapter(carAdapter);
@@ -46,15 +47,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Car> cars) {
                 carAdapter.setList(cars);
-                carAdapter.setDashboardFragment(DashboardFragment.this);
             }
-        });
-        binding.addCar.setOnClickListener(v ->  {
-            Fragment addCarFragment = new AddCar();
-            FragmentTransaction trans=getFragmentManager().beginTransaction();
-            trans.add(R.id.addCarFrame, addCarFragment);
-            trans.commit();
-            binding.addCar.setVisibility(View.GONE);
         });
         return root;
     }
@@ -64,4 +57,5 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

@@ -25,11 +25,16 @@ public class User {
 
     public User(){}
 
-    public User(String username, String phone, String password){
+    public User(String username, String phone, String password, String role){
         this.username = username;
         this.password = password;
         this.phone = phone;
-        this.role = UserRoles.CLIENT;
+        if(role.equals("Клиент")){
+            this.role = UserRoles.CLIENT;
+        } else if(role.equals("Продавец")){
+            this.role = UserRoles.SELLER;
+        }
+
     }
 
     public long getId() {

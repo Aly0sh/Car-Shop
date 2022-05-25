@@ -2,7 +2,8 @@
     <string name="app_name">Car-Shop</string>
     <string name="title_home">Главная</string>
     <string name="title_dashboard">Список машин</string>
-    <string name="title_notifications">Корзина</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_notifications">Список моих машин</string>
+    <string name="seller">Список моих машин</string>
+    <string name="client">Понравившиеся</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -51,6 +51,10 @@ public class UserSingl {
         return role.name()  ;
     }
 
+    public UserRoles getUserRole(){
+        return role;
+    }
+
     public void setRole(UserRoles role) {
         this.role = role;
     }

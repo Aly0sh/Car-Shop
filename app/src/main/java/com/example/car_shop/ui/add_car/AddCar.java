@@ -20,7 +20,7 @@ import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.FragmentAddCarBinding;
-import com.example.car_shop.ui.dashboard.DashboardFragment;
+import com.example.car_shop.ui.cars.CarsFragment;
 import com.example.car_shop.userService.UserSingl;
 
 import java.io.ByteArrayOutputStream;
@@ -80,7 +80,7 @@ public class AddCar extends Fragment {
                     AppDatabase appDatabase = App.getAppDatabase(getContext());
                     appDatabase.carDao().insert(car);
 
-                    DashboardFragment dashboardFragment = new DashboardFragment();
+                    CarsFragment dashboardFragment = new CarsFragment();
                     getFragmentManager()
                             .beginTransaction()
                             .setReorderingAllowed(true)

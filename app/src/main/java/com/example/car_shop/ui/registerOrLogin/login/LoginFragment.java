@@ -3,6 +3,7 @@ package com.example.car_shop.ui.registerOrLogin.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -15,10 +16,8 @@ import androidx.room.Room;
 
 import com.example.car_shop.MainActivity;
 import com.example.car_shop.data.App;
-import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.LoginFragmentBinding;
 import com.example.car_shop.ui.registerOrLogin.register.RegisterFragment;
-import com.example.car_shop.userService.UserSingl;
 
 public class LoginFragment extends Fragment {
 
@@ -43,6 +42,7 @@ public class LoginFragment extends Fragment {
 
         return root;
     }
+
 
     private void onClick(){
         binding.login.setOnClickListener(view -> {
@@ -72,5 +72,7 @@ public class LoginFragment extends Fragment {
                     .commit();
         });
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.example.car_shop.data;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.room.Room;

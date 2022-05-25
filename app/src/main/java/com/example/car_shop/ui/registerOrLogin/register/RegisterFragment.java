@@ -57,7 +57,7 @@ public class RegisterFragment extends Fragment {
                 }
                 else {
                     Toast.makeText(binding.getRoot().getContext(), "Вы зарегистрированы", Toast.LENGTH_LONG).show();
-                    mViewModel.register(new User(username, phone, password));
+                    mViewModel.register(new User(username, phone, password, binding.role.getSelectedItem().toString()));
                     toLoginPage();
                 }
             }

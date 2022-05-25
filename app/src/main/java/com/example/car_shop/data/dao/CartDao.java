@@ -6,23 +6,21 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.car_shop.data.models.Car;
+import com.example.car_shop.data.models.Cart;
 
 import java.util.List;
 
 @Dao
-public interface CarDao {
-    @Query("SELECT * FROM Car")
+public interface CartDao {
+    @Query("SELECT * FROM Cart")
     List<Car> getAll();
 
-    @Query("SELECT * FROM Car WHERE userId = :userId")
+    @Query("SELECT * FROM Cart WHERE user_id = :userId")
     List<Car> getMyCars(long userId);
 
-    @Query("SELECT * FROM Car WHERE id = :carId")
-    Car getById(long carId);
-
     @Insert
-    void insert(Car car);
+    void insert(Cart cart);
 
     @Delete
-    void delete(Car car);
+    void delete(Cart cart);
 }

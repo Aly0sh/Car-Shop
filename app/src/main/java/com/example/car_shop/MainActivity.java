@@ -1,7 +1,11 @@
 package com.example.car_shop;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.example.car_shop.data.enums.UserRoles;
+import com.example.car_shop.userService.UserSingl;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,11 +31,21 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        Menu navigation = navView.getMenu();
+        MenuItem item = navigation.findItem(R.id.navigation_notifications);
+        if(UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
+            item.setTitle(getString(R.string.client));
+        } else if (UserSingl.getUserSingln().getUserRole() == UserRoles.SELLER){
+            item.setTitle(getString(R.string.seller));
+        }
     }
+
+
 
 }

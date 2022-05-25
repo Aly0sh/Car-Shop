@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.car_shop.databinding.ActivityRegisterLoginBinding;
 import com.example.car_shop.ui.registerOrLogin.login.LoginFragment;
+import com.example.car_shop.userService.UserSingl;
 
 
 public class RegisterLoginActivity extends AppCompatActivity {
@@ -18,12 +19,13 @@ public class RegisterLoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_register_login);
 
-        LoginFragment loginFragment = new LoginFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.registerAndLogin, loginFragment, "register fragment")
-                .addToBackStack(null)
-                .commit();
-
+        if (UserSingl.getUserSingln() == null){
+            LoginFragment loginFragment = new LoginFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.registerAndLogin, loginFragment, "register fragment")
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

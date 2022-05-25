@@ -1,4 +1,4 @@
-package com.example.car_shop.ui.dashboard;
+package com.example.car_shop.ui.cars;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.car_shop.R;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.databinding.FragmentCarPageBinding;
 

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_dashboard">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.car_shop.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:name="com.example.car_shop.ui.home.HomeFragment"-->
+<!--        android:label="@string/title_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.car_shop.ui.dashboard.DashboardFragment"
+        android:name="com.example.car_shop.ui.cars.CarsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_cars" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.car_shop.ui.notifications.NotificationsFragment"
+        android:name="com.example.car_shop.ui.mycars.MyCarsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_my_cars" />
 </navigation>

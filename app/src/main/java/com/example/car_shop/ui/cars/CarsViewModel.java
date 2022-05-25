@@ -1,20 +1,18 @@
-package com.example.car_shop.ui.dashboard;
+package com.example.car_shop.ui.cars;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.room.Room;
 
 import com.example.car_shop.data.dao.CarDao;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
-import com.example.car_shop.databinding.FragmentDashboardBinding;
 import com.example.car_shop.userService.UserSingl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardViewModel extends ViewModel {
+public class CarsViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Car>> cars;
     private ArrayList<Car> carList;
@@ -26,7 +24,7 @@ public class DashboardViewModel extends ViewModel {
         this.appDatabase = appDatabase;
     }
 
-    public DashboardViewModel() {
+    public CarsViewModel() {
         cars = new MutableLiveData<>();
     }
 

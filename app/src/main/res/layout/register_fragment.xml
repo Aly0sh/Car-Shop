@@ -65,12 +65,28 @@
 
 
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="360dp"
+        android:layout_gravity="center_horizontal">
+        <Spinner
+            android:id="@+id/role"
+            android:layout_width="300dp"
+            android:inputType="textPassword"
+            android:layout_height="50dp"
+            android:paddingLeft="15dp"
+            android:background="#B096EA"
+            android:entries="@array/roles"/>
+    </androidx.cardview.widget.CardView>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/register"
         android:layout_width="230dp"
         android:layout_height="60dp"
-        android:layout_marginTop="390dp"
+        android:layout_marginTop="440dp"
         android:layout_gravity="center_horizontal"
         app:cornerRadius="10dp"
         android:text="Зарегистрироваться"
@@ -81,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Авторизация"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="510dp"
         android:layout_gravity="center_horizontal"
         />
 
