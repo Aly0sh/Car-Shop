@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.car_shop.data.enums.Status;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.databinding.CarItemLayoutBinding;
+import com.example.car_shop.databinding.MyCarItemLayoutBinding;
 import com.example.car_shop.ui.cars.CarPageFragment;
 import com.example.car_shop.ui.cars.CarsFragment;
 
@@ -29,7 +31,7 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
     @NonNull
     @Override
     public MyCarsAdapter.CarHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CarItemLayoutBinding carItemLayoutBinding = CarItemLayoutBinding
+        MyCarItemLayoutBinding carItemLayoutBinding = MyCarItemLayoutBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false);
         MyCarsAdapter.CarHolder carHolder = new MyCarsAdapter.CarHolder(carItemLayoutBinding);
         return carHolder;
@@ -41,6 +43,8 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
         holder.binding.brand.setText("Марка: " + car.getBrand());
         holder.binding.model.setText("Модель: " + car.getModel());
         holder.binding.price.setText("Цена: " + car.getPrice() + " сом");
+        holder.binding.status.setText("Статус: " + ((car.getStatus() == Status.SALE)?"В продаже":"Продано"));
+
         holder.binding.carImg.setImageBitmap(BitmapFactory.decodeByteArray(car.getPhoto(), 0, car.getPhoto().length));
         holder.itemView.setOnClickListener(v -> {
             CarPageFragment carPageFragment = new CarPageFragment();
@@ -64,9 +68,9 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
     }
 
     public class CarHolder extends RecyclerView.ViewHolder {
-        private CarItemLayoutBinding binding;
+        private MyCarItemLayoutBinding binding;
 
-        public CarHolder(@NonNull CarItemLayoutBinding itemView) {
+        public CarHolder(@NonNull MyCarItemLayoutBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }

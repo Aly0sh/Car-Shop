@@ -4,6 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 import com.example.car_shop.data.dao.CarDao;
+import com.example.car_shop.data.dao.CartDao;
 import com.example.car_shop.data.dao.UserDao;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.models.User;
@@ -16,4 +17,5 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
 
+    public abstract CartDao cartDao();
 }
