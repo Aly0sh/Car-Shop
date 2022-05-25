@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/edit"
+        android:title="Редактировать"
+        />
+    <item
+        android:id="@+id/sold"
+        android:title="Продано"
+        />
+    <item
+        android:id="@+id/sale"
+        android:title="На продажу"
+        />
+</menu>
