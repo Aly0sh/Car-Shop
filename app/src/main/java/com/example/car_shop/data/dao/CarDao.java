@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.car_shop.data.models.Car;
 
@@ -22,6 +23,9 @@ public interface CarDao {
 
     @Insert
     void insert(Car car);
+
+    @Update
+    void update(Car car);
 
     @Delete
     void delete(Car car);
