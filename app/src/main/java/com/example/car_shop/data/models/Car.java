@@ -1,6 +1,5 @@
 package com.example.car_shop.data.models;
 
-import androidx.annotation.ColorInt;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

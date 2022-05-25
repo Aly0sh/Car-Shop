@@ -40,7 +40,7 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
     @Override
     public void onBindViewHolder(@NonNull MyCarsAdapter.CarHolder holder, int position) {
         Car car = cars.get(position);
-        holder.binding.brand.setText("Марка: " + car.getBrand());
+        holder.binding.brand.setText(car.getBrand());
         holder.binding.model.setText("Модель: " + car.getModel());
         holder.binding.price.setText("Цена: " + car.getPrice() + " сом");
         holder.binding.status.setText("Статус: " + ((car.getStatus() == Status.SALE)?"В продаже":"Продано"));

@@ -7,9 +7,10 @@ import com.example.car_shop.data.dao.CarDao;
 import com.example.car_shop.data.dao.CartDao;
 import com.example.car_shop.data.dao.UserDao;
 import com.example.car_shop.data.models.Car;
+import com.example.car_shop.data.models.Cart;
 import com.example.car_shop.data.models.User;
 
-@Database(entities = {Car.class, User.class}, version = 1, exportSchema = true)
+@Database(entities = {Car.class, User.class, Cart.class}, version = 1, exportSchema = true)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase room;
 

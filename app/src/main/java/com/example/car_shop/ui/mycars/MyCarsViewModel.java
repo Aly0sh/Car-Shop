@@ -43,7 +43,7 @@ public class MyCarsViewModel extends ViewModel {
         List<Cart> myCarts = cartDao.getMyCarts(UserSingl.getUserSingln().getUserId());
 
         for (Cart cart : myCarts){
-            myCars.add(carDao.getById(cart.getCar()));
+            myCars.add(carDao.getById(cart.getCarId()));
         }
 
         cars.setValue(myCars);

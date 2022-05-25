@@ -2,29 +2,24 @@ package com.example.car_shop.data.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(
-        tableName = "carts",
-        foreignKeys = @ForeignKey(entity = Car.class,
-        parentColumns = "id",
-        childColumns = "car_id"))
+@Entity
 public class Cart implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-    @ColumnInfo(name = "user_id")
-    private long user;
+    @ColumnInfo(name = "userId")
+    private long userId;
 
-    @ColumnInfo(name = "car_id")
-    private long car;
+    @ColumnInfo(name = "carId")
+    private long carId;
 
     public Cart(long userId, long carId){
-        this.user = userId;
-        this.car = carId;
+        this.userId = userId;
+        this.carId = carId;
     }
 
     public long getId() {
@@ -35,19 +30,19 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    public long getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(long user) {
-        this.user = user;
+    public void setUserId(long user) {
+        this.userId = user;
     }
 
-    public long getCar() {
-        return car;
+    public long getCarId() {
+        return carId;
     }
 
-    public void setCar(long car) {
-        this.car = car;
+    public void setCarId(long car) {
+        this.carId = car;
     }
 }
