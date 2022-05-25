@@ -26,18 +26,20 @@ import java.util.ArrayList;
 
 public class MyCarsFragment extends Fragment {
     private FragmentMyCarsBinding binding;
-    private CartDao cartDao;
-    private CarDao carDao;
+    private CarsViewModel carsViewModel;
+    private MyCarsViewModel myCarsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CarsViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(CarsViewModel.class);
+
+        carsViewModel = new ViewModelProvider(this).get(CarsViewModel.class);
+        myCarsViewModel = new ViewModelProvider(this).get(MyCarsViewModel.class);
 
         binding = FragmentMyCarsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        dashboardViewModel.setAppDatabase(App.getAppDatabase(getContext()));
+        myCarsViewModel.setAppDatabase(App.getAppDatabase(getContext()));
+        carsViewModel.setAppDatabase(App.getAppDatabase(getContext()));
 
         RecyclerView recyclerView = binding.carRecycler;
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
@@ -45,11 +47,20 @@ public class MyCarsFragment extends Fragment {
         MyCarsAdapter carAdapter = new MyCarsAdapter();
         recyclerView.setAdapter(carAdapter);
         if (UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
-            cartDao = App.getAppDatabase(getContext()).cartDao();
-            carAdapter.setList(cartDao.getMyCars(UserSingl.getUserSingln().getUserId()));
-        } else if (UserSingl.getUserSingln().getUserRole() == UserRoles.SELLER) {
-            carDao = App.getAppDatabase(getContext()).carDao();
-            carAdapter.setList(carDao.getMyCars(UserSingl.getUserSingln().getUserId()));
+            myCarsViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
+                @Override
+                public void onChanged(ArrayList<Car> cars) {
+                    carAdapter.setList(cars);
+                }
+            });
+        }
+        else if (UserSingl.getUserSingln().getUserRole() == UserRoles.SELLER) {
+            carsViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
+                @Override
+                public void onChanged(ArrayList<Car> cars) {
+                    carAdapter.setList(cars);
+                }
+            });
         }
         return root;
     }
