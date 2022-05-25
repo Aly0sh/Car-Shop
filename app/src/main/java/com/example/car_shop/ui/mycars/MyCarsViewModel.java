@@ -4,16 +4,50 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MyCarsViewModel extends ViewModel {
+import com.example.car_shop.data.dao.CarDao;
+import com.example.car_shop.data.dao.CartDao;
+import com.example.car_shop.data.models.Car;
+import com.example.car_shop.data.models.Cart;
+import com.example.car_shop.data.room.AppDatabase;
+import com.example.car_shop.userService.UserSingl;
 
-    private final MutableLiveData<String> mText;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MyCarsViewModel extends ViewModel {
+    private final MutableLiveData<ArrayList<Cart>> carts;
+    private final MutableLiveData<ArrayList<Car>> cars;
+    private ArrayList<Cart> cartArrayList;
+    private AppDatabase appDatabase;
+    private CartDao cartDao;
+    private CarDao carDao;
 
     public MyCarsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        carts = new MutableLiveData<>();
+        cars = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void setAppDatabase(AppDatabase appDatabase) {
+        this.appDatabase = appDatabase;
+
+    }
+
+    private void init(){
+        cartDao = appDatabase.cartDao();
+        carDao = appDatabase.carDao();
+    }
+
+    public LiveData<ArrayList<Car>> getMyCars(){
+        init();
+        ArrayList<Car> myCars = new ArrayList<>();
+        List<Cart> myCarts = cartDao.getMyCarts(UserSingl.getUserSingln().getUserId());
+
+        for (Cart cart : myCarts){
+            myCars.add(carDao.getById(cart.getCar()));
+        }
+
+        cars.setValue(myCars);
+
+        return cars;
     }
 }

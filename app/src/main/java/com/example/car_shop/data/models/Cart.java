@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(foreignKeys = @ForeignKey(entity = Car.class,
+@Entity(
+        tableName = "carts",
+        foreignKeys = @ForeignKey(entity = Car.class,
         parentColumns = "id",
         childColumns = "car_id"))
 public class Cart implements Serializable {
