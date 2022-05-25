@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dashboard.CarPageFragment">
+
+    <ImageView
+        android:id="@+id/imgSelector"
+        android:layout_width="336dp"
+        android:layout_height="280dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/car_upload" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        >
+        <TextView
+            android:id="@+id/brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Бренд:"
+            android:layout_marginTop="300dp"
+            />
+
+        <TextView
+            android:id="@+id/model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Модель:"
+            android:layout_marginTop="340dp"
+            />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Цена:"
+            android:layout_marginTop="380dp"
+            />
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/showPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="420dp"
+        android:text="Обратитьтся к владельцу"
+        app:cornerRadius="10dp"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="10dp"
+        >
+        <TextView
+            android:id="@+id/sellerPhone"
+            android:padding="15dp"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:background="#B096EA"
+            android:text="+996 778 39 36 07"
+            android:visibility="gone"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

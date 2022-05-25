@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import com.example.car_shop.MainActivity;
+import com.example.car_shop.data.App;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.LoginFragmentBinding;
 import com.example.car_shop.ui.registerOrLogin.register.RegisterFragment;
@@ -37,7 +38,7 @@ public class LoginFragment extends Fragment {
         View root = binding.getRoot();
 
         mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        mViewModel.setDatabase(Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build());
+        mViewModel.setDatabase(App.getAppDatabase(getContext()));
         onClick();
 
         return root;

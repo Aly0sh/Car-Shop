@@ -1,8 +1,6 @@
 package com.example.car_shop.ui.add_car;
 
-import static android.app.Activity.RESULT_OK;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,9 +8,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.room.Room;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -20,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.FragmentAddCarBinding;
@@ -79,15 +76,16 @@ public class AddCar extends Fragment {
                     byte[] img = baos.toByteArray();
 
                     int price = Integer.valueOf(strPrice);
-                    Car car = new Car(brand, model, price, img, UserSingl.getUserSingln().getUserId());
-                    AppDatabase appDatabase = Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build();
+                    Car car = new Car(brand, model, price, img, UserSingl.getUserSingln().getUserId(), UserSingl.getUserSingln().getPhone());
+                    AppDatabase appDatabase = App.getAppDatabase(getContext());
                     appDatabase.carDao().insert(car);
 
                     DashboardFragment dashboardFragment = new DashboardFragment();
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(this.getId(), dashboardFragment, "car list")
-                            .addToBackStack(null)
+                            .setReorderingAllowed(true)
+                            .disallowAddToBackStack()
+                            .replace(getId(), dashboardFragment, "car list")
                             .commit();
                 }
                 else {

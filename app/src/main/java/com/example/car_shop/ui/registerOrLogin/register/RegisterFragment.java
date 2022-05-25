@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
+import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.User;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.RegisterFragmentBinding;
@@ -34,7 +35,7 @@ public class RegisterFragment extends Fragment {
         View root = binding.getRoot();
         mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
-        mViewModel.setDatabase(Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build());
+        mViewModel.setDatabase(App.getAppDatabase(getContext()));
 
         onClick();
 

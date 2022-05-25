@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.car_shop.R;
+import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
 import com.example.car_shop.databinding.FragmentDashboardBinding;
@@ -34,7 +35,7 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        dashboardViewModel.setAppDatabase(Room.databaseBuilder(binding.getRoot().getContext(), AppDatabase.class, "database").allowMainThreadQueries().build());
+        dashboardViewModel.setAppDatabase(App.getAppDatabase(getContext()));
 
         RecyclerView recyclerView = binding.carRecycler;
         recyclerView.setLayoutManager(new GridLayoutManager(binding.getRoot().getContext(), 2));
@@ -45,17 +46,15 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Car> cars) {
                 carAdapter.setList(cars);
+                carAdapter.setDashboardFragment(DashboardFragment.this);
             }
         });
-        binding.addCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment addCarFragment = new AddCar();
-                FragmentTransaction trans=getFragmentManager().beginTransaction();
-                trans.add(R.id.addCarFrame, addCarFragment);
-                trans.commit();
-                binding.addCar.setVisibility(View.GONE);
-            }
+        binding.addCar.setOnClickListener(v ->  {
+            Fragment addCarFragment = new AddCar();
+            FragmentTransaction trans=getFragmentManager().beginTransaction();
+            trans.add(R.id.addCarFrame, addCarFragment);
+            trans.commit();
+            binding.addCar.setVisibility(View.GONE);
         });
         return root;
     }

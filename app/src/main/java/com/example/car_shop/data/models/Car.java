@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "car")
-public class Car {
+public class Car implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
@@ -22,17 +24,21 @@ public class Car {
     @ColumnInfo(name = "userId")
     private long userId;
 
+    @ColumnInfo(name = "seller_phone")
+    private String sellerPhone;
+
     @ColumnInfo(name = "photo", typeAffinity = ColumnInfo.BLOB)
     private byte[] photo;
 
     public Car(){}
 
-    public Car(String brand, String model, int price, byte[] photo, long userId){
+    public Car(String brand, String model, int price, byte[] photo, long userId, String sellerPhone){
         this.brand = brand;
         this.model = model;
         this.price = price;
         this.photo = photo;
         this.userId = userId;
+        this.sellerPhone = sellerPhone;
     }
 
     public long getId() {
@@ -81,5 +87,13 @@ public class Car {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String getSellerPhone() {
+        return sellerPhone;
+    }
+
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
     }
 }

@@ -1,10 +1,13 @@
 package com.example.car_shop.ui.dashboard;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.car_shop.data.models.Car;
@@ -15,6 +18,7 @@ import java.util.List;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
     private List<Car> cars = new ArrayList<>();
+    private DashboardFragment dashboardFragment;
 
     public void setList(List<Car> cars){
         this.cars = cars;
@@ -37,6 +41,20 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
         holder.binding.model.setText("Модель: " + car.getModel());
         holder.binding.price.setText("Цена: " + car.getPrice() + " сом");
         holder.binding.carImg.setImageBitmap(BitmapFactory.decodeByteArray(car.getPhoto(), 0, car.getPhoto().length));
+        holder.itemView.setOnClickListener(v -> {
+            CarPageFragment carPageFragment = new CarPageFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("car", car);
+            carPageFragment.setArguments(bundle);
+
+            dashboardFragment.getFragmentManager()
+                    .beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .replace(dashboardFragment.getId(), carPageFragment, "carPageFragment")
+                    .addToBackStack(null)
+                    .commit();
+
+        });
     }
 
     @Override
@@ -51,5 +69,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
             super(itemView.getRoot());
             this.binding = itemView;
         }
+    }
+
+    public void setDashboardFragment(DashboardFragment dashboardFragment){
+        this.dashboardFragment = dashboardFragment;
     }
 }
