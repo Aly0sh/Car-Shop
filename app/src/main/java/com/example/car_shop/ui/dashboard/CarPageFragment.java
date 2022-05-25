@@ -1,6 +1,8 @@
 package com.example.car_shop.ui.dashboard;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,10 +49,12 @@ public class CarPageFragment extends Fragment {
         binding.showPhone.setOnClickListener(v -> {
             binding.sellerPhone.setVisibility(View.VISIBLE);
         });
-        if (binding.sellerPhone.getVisibility() == View.VISIBLE){
-
-        }
-        return inflater.inflate(R.layout.fragment_car_page, container, false);
+        binding.sellerPhone.setOnClickListener(v -> {
+            if (binding.sellerPhone.getVisibility() == View.VISIBLE){
+                getContext().startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + car.getSellerPhone())));
+            }
+        });
+        return binding.getRoot();
     }
 
     @Override
