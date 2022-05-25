@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.car_shop.data.enums.Status;
 import com.example.car_shop.data.models.Car;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public interface CarDao {
 
     @Insert
     void insert(Car car);
+
+    @Query("UPDATE car SET car_status = :status WHERE id = :carId")
+    void updateStatus(Status status, long carId);
 
     @Delete
     void delete(Car car);

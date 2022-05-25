@@ -22,7 +22,9 @@ public interface CartDao {
 
 
     @Query("SELECT * FROM cart WHERE carId = :carId AND userId = :userId")
-    List<Cart> getByCarId(long carId, long userId);
+    Cart getByCarId(long carId, long userId);
+
+
 
     @Insert
     void insert(Cart cart);

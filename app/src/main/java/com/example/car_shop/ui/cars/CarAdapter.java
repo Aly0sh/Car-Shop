@@ -38,6 +38,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
         CarItemLayoutBinding carItemLayoutBinding = CarItemLayoutBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false);
         CarHolder carHolder = new CarHolder(carItemLayoutBinding);
+        cartDao = App.getAppDatabase(parent.getContext()).cartDao();
         return carHolder;
     }
 
@@ -62,7 +63,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
                     .commit();
 
         });
-        cartDao = App.getAppDatabase(holder.binding.getRoot().getContext()).cartDao();
         if (UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
             if (check(car)){
                 holder.binding.like.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
         } else {
             holder.binding.like.setVisibility(View.GONE);
         }
-
     }
 
     @Override
@@ -95,9 +94,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
         }
     }
 
-    public boolean check(Car car){
-        for (Cart i:cartDao.getByCarId(car.getId(), UserSingl.getUserSingln().getUserId())){
-            if (i.getCarId() == car.getId()){
+    public boolean check(Car car) {
+        if (cartDao.getByCarId(car.getId(), UserSingl.getUserSingln().getUserId()) != null){
+            if (cartDao.getByCarId(car.getId(), UserSingl.getUserSingln().getUserId()).getCarId() == car.getId()) {
                 return false;
             }
         }

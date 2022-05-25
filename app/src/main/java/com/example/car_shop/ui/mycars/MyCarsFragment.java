@@ -29,6 +29,7 @@ public class MyCarsFragment extends Fragment {
     private FragmentMyCarsBinding binding;
     private CarsViewModel carsViewModel;
     private MyCarsViewModel myCarsViewModel;
+    private static MyCarsAdapter carAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MyCarsFragment extends Fragment {
         RecyclerView recyclerView = binding.carRecycler;
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         recyclerView.setHasFixedSize(true);
-        MyCarsAdapter carAdapter = new MyCarsAdapter();
+        carAdapter = new MyCarsAdapter();
         recyclerView.setAdapter(carAdapter);
         if (UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
             myCarsViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
@@ -64,6 +65,10 @@ public class MyCarsFragment extends Fragment {
             });
         }
         return root;
+    }
+
+    public static void updateRecycler(){
+        carAdapter.notifyDataSetChanged();
     }
 
     @Override
