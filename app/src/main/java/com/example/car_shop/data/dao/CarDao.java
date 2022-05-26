@@ -13,6 +13,8 @@ import java.util.List;
 
 @Dao
 public interface CarDao {
+
+
     @Query("SELECT * FROM Car")
     List<Car> getAll();
 
@@ -27,9 +29,11 @@ public interface CarDao {
 
     @Query("UPDATE car SET car_status = :status WHERE id = :carId")
     void updateStatus(Status status, long carId);
+
     @Update
     void update(Car car);
 
     @Delete
     void delete(Car car);
+
 }
