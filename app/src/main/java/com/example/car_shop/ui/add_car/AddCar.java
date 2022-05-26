@@ -81,12 +81,12 @@ public class AddCar extends Fragment {
                     AppDatabase appDatabase = App.getAppDatabase(getContext());
                     appDatabase.carDao().insert(car);
 
-                    MyCarsFragment dashboardFragment = new MyCarsFragment();
+                    MyCarsFragment myCarsFragment = new MyCarsFragment();
                     getFragmentManager()
                             .beginTransaction()
                             .setReorderingAllowed(true)
                             .disallowAddToBackStack()
-                            .replace(getId(), dashboardFragment, "car list")
+                            .replace(getId(), myCarsFragment)
                             .commit();
                 }
                 else {

@@ -3,6 +3,7 @@ package com.example.car_shop.ui.start_fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,8 +36,9 @@ public class StartFragment extends Fragment {
 
         binding.signup.setOnClickListener(view -> {
             RegisterFragment registerFragment = new RegisterFragment();
-            getFragmentManager()
+            getActivity().getSupportFragmentManager()
                     .beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .replace(this.getId(), registerFragment, "toLoginPage")
                     .addToBackStack(null)
                     .commit();
@@ -44,8 +46,9 @@ public class StartFragment extends Fragment {
 
         binding.signin.setOnClickListener(view -> {
             LoginFragment loginFragment = new LoginFragment();
-            getFragmentManager()
+            getActivity().getSupportFragmentManager()
                     .beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .replace(this.getId(), loginFragment, "toLoginPage")
                     .addToBackStack(null)
                     .commit();

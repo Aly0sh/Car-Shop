@@ -1,5 +1,6 @@
 package com.example.car_shop.ui.mycars;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
+import com.example.car_shop.MainActivity;
 import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
@@ -106,13 +108,8 @@ public class MyCarEditFragment extends Fragment {
             AppDatabase appDatabase = App.getAppDatabase(getContext());
             appDatabase.carDao().update(car);
 
-            MyCarsFragment carsFragment = new MyCarsFragment();
-            getFragmentManager()
-                    .beginTransaction()
-                    .setReorderingAllowed(true)
-                    .disallowAddToBackStack()
-                    .replace(getId(), carsFragment, "my cars")
-                    .commit();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -76,7 +76,7 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
                                 myCarsFragment.getFragmentManager()
                                         .beginTransaction()
                                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                        .replace(myCarsFragment.getId(),myCarEditFragment, "myCarEditFragment")
+                                        .replace(myCarsFragment.getId(),myCarEditFragment)
                                         .addToBackStack(null)
                                         .commit();
                                 return true;
@@ -126,7 +126,7 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
             myCarsFragment.getFragmentManager()
                     .beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(myCarsFragment.getId(), carPageFragment, "carPageFragment")
+                    .replace(myCarsFragment.getId(), carPageFragment)
                     .addToBackStack(null)
                     .commit();
 

@@ -76,7 +76,7 @@ public class MyCarsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         binding.addCar.setOnClickListener(v ->  {
-            Fragment addCarFragment = new AddCar();
+            AddCar addCarFragment = new AddCar();
             getFragmentManager()
                     .beginTransaction()
                     .setReorderingAllowed(true)

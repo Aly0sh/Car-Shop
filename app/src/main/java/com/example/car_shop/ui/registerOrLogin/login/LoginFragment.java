@@ -63,10 +63,11 @@ public class LoginFragment extends Fragment {
 
         binding.toRegisterPage.setOnClickListener(view -> {
             RegisterFragment registerFragment = new RegisterFragment();
-            getFragmentManager()
+            getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(this.getId(), registerFragment, "toLoginPage")
-                    .addToBackStack(null)
+                    .setReorderingAllowed(true)
+                    .replace(this.getId(), registerFragment)
+//                    .addToBackStack(null)
                     .commit();
         });
     }
