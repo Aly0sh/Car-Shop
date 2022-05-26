@@ -48,16 +48,16 @@ public class CarsFragment extends Fragment {
                 carAdapter.setCarsFragment(CarsFragment.this);
             }
         });
-        if(UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
-            binding.addCar.setVisibility(View.GONE);
-        }
-        binding.addCar.setOnClickListener(v ->  {
-            Fragment addCarFragment = new AddCar();
-            FragmentTransaction trans=getFragmentManager().beginTransaction();
-            trans.add(getId(), addCarFragment);
-            trans.commit();
-            binding.addCar.setVisibility(View.GONE);
-        });
+//        if(UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
+//            binding.addCar.setVisibility(View.GONE);
+//        }
+//        binding.addCar.setOnClickListener(v ->  {
+//            Fragment addCarFragment = new AddCar();
+//            FragmentTransaction trans=getFragmentManager().beginTransaction();
+//            trans.add(getId(), addCarFragment);
+//            trans.commit();
+//            binding.addCar.setVisibility(View.GONE);
+//        });
         return root;
     }
 

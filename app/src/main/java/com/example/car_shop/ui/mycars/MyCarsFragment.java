@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.example.car_shop.data.dao.CartDao;
 import com.example.car_shop.data.enums.UserRoles;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.databinding.FragmentMyCarsBinding;
+import com.example.car_shop.ui.add_car.AddCar;
 import com.example.car_shop.ui.cars.CarAdapter;
 import com.example.car_shop.ui.cars.CarsViewModel;
 import com.example.car_shop.userService.UserSingl;
@@ -49,6 +51,7 @@ public class MyCarsFragment extends Fragment {
         carAdapter = new MyCarsAdapter();
         recyclerView.setAdapter(carAdapter);
         if (UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
+            binding.addCar.setVisibility(View.GONE);
             myCarsViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
                 @Override
                 public void onChanged(ArrayList<Car> cars) {
@@ -67,6 +70,22 @@ public class MyCarsFragment extends Fragment {
             });
         }
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.addCar.setOnClickListener(v ->  {
+            Fragment addCarFragment = new AddCar();
+            getFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(getId(), addCarFragment)
+                    .addToBackStack(null)
+                    .commit();
+
+            binding.addCar.setVisibility(View.GONE);
+        });
     }
 
     public static void updateRecycler(){
