@@ -68,6 +68,17 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getTitle().toString()){
                             case "Редактировать":
+                                MyCarEditFragment myCarEditFragment = new MyCarEditFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("carEdit", car);
+                                myCarEditFragment.setArguments(bundle);
+
+                                myCarsFragment.getFragmentManager()
+                                        .beginTransaction()
+                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                        .replace(myCarsFragment.getId(),myCarEditFragment, "myCarEditFragment")
+                                        .addToBackStack(null)
+                                        .commit();
                                 return true;
                             case "Продано":
                                 carDao.updateStatus(Status.SOLD, car.getId());

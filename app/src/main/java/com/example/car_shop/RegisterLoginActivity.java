@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.car_shop.databinding.ActivityRegisterLoginBinding;
 import com.example.car_shop.ui.registerOrLogin.login.LoginFragment;
+import com.example.car_shop.ui.start_fragment.StartFragment;
 import com.example.car_shop.userService.UserSingl;
 
 
@@ -20,10 +21,10 @@ public class RegisterLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_login);
 
         if (UserSingl.getUserSingln() == null){
-            LoginFragment loginFragment = new LoginFragment();
+            StartFragment startFragment = new StartFragment();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.registerAndLogin, loginFragment, "register fragment")
+                    .replace(R.id.registerAndLogin, startFragment, "register fragment")
                     .addToBackStack(null)
                     .commit();
         }

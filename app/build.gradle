@@ -58,6 +58,11 @@ dependencies {
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation "androidx.room:room-guava:$room_version"
 
+    //animation -> YoYo
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+
+    //для анимации
+    implementation 'com.airbnb.android:lottie:3.4.1'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 

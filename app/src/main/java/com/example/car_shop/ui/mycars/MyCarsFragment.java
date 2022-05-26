@@ -53,6 +53,7 @@ public class MyCarsFragment extends Fragment {
                 @Override
                 public void onChanged(ArrayList<Car> cars) {
                     carAdapter.setList(cars);
+                    carAdapter.setMyCarsFragment(MyCarsFragment.this);
                 }
             });
         }
@@ -61,6 +62,7 @@ public class MyCarsFragment extends Fragment {
                 @Override
                 public void onChanged(ArrayList<Car> cars) {
                     carAdapter.setList(cars);
+                    carAdapter.setMyCarsFragment(MyCarsFragment.this);
                 }
             });
         }
