@@ -109,7 +109,9 @@ public class MyCarEditFragment extends Fragment {
             appDatabase.carDao().update(car);
 
             Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+
         }
     }
 }

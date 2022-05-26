@@ -1,6 +1,7 @@
 package com.example.car_shop.ui.add_car;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.car_shop.MainActivity;
 import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
@@ -81,13 +83,9 @@ public class AddCar extends Fragment {
                     AppDatabase appDatabase = App.getAppDatabase(getContext());
                     appDatabase.carDao().insert(car);
 
-                    MyCarsFragment myCarsFragment = new MyCarsFragment();
-                    getFragmentManager()
-                            .beginTransaction()
-                            .setReorderingAllowed(true)
-                            .disallowAddToBackStack()
-                            .replace(getId(), myCarsFragment)
-                            .commit();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
                 else {
                     Toast.makeText(getContext(), "Выберите фотку", Toast.LENGTH_SHORT).show();
