@@ -8,43 +8,50 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.car_shop.R;
+import com.example.car_shop.databinding.FragmentMyCarsBinding;
+import com.example.car_shop.databinding.FragmentStartBinding;
+import com.example.car_shop.ui.registerOrLogin.login.LoginFragment;
+import com.example.car_shop.ui.registerOrLogin.register.RegisterFragment;
 
 public class StartFragment extends Fragment {
 
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    public StartFragment() {
-
-    }
-
-
-    public static StartFragment newInstance(String param1, String param2) {
-        StartFragment fragment = new StartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private LottieAnimationView lotty;
+    private FragmentStartBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_start, container, false);
+        binding = FragmentStartBinding.inflate(inflater, container, false);
+        lotty = binding.lotty;
+        lotty.setAnimation(R.raw.porshe);
+
+        binding.signup.setOnClickListener(view -> {
+            RegisterFragment registerFragment = new RegisterFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(this.getId(), registerFragment, "toLoginPage")
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        binding.signin.setOnClickListener(view -> {
+            LoginFragment loginFragment = new LoginFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(this.getId(), loginFragment, "toLoginPage")
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        return binding.getRoot();
     }
+
 }
