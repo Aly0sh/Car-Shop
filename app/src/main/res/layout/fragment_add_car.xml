@@ -40,7 +40,7 @@
         android:layout_height="50dp"
         android:background="@drawable/input"
         android:textAlignment="center"
-        android:hint="Введите название марки"
+        android:hint="Введите название модели"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="340dp"
         />

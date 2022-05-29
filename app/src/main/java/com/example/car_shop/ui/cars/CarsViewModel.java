@@ -41,6 +41,7 @@ public class CarsViewModel extends ViewModel {
 
     public LiveData<ArrayList<Car>> getMutableLiveData() {
         init();
+        //carDao.deleteByModel("NSX 2017");
         populateList(carDao.getAll());
         return cars;
     }

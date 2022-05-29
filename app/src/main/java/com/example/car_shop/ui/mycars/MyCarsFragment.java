@@ -55,6 +55,9 @@ public class MyCarsFragment extends Fragment {
             myCarsViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
                 @Override
                 public void onChanged(ArrayList<Car> cars) {
+                    if(cars.isEmpty()){
+                        binding.empty.setVisibility(View.VISIBLE);
+                    }
                     carAdapter.setList(cars);
                     carAdapter.setMyCarsFragment(MyCarsFragment.this);
                 }
@@ -64,6 +67,9 @@ public class MyCarsFragment extends Fragment {
             carsViewModel.getMyCars().observe(getViewLifecycleOwner(), new Observer<ArrayList<Car>>() {
                 @Override
                 public void onChanged(ArrayList<Car> cars) {
+                    if(cars.isEmpty()){
+                        binding.empty.setVisibility(View.VISIBLE);
+                    }
                     carAdapter.setList(cars);
                     carAdapter.setMyCarsFragment(MyCarsFragment.this);
                 }

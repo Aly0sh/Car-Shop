@@ -24,6 +24,9 @@ public interface CarDao {
     @Query("SELECT * FROM Car WHERE id = :carId")
     Car getById(long carId);
 
+    @Query("SELECT model FROM Car")
+    List<String> getsize();
+
     @Insert
     void insert(Car car);
 
@@ -32,6 +35,9 @@ public interface CarDao {
 
     @Update
     void update(Car car);
+
+    @Query("DELETE FROM car WHERE model = :model")
+    void deleteByModel(String model);
 
     @Delete
     void delete(Car car);
