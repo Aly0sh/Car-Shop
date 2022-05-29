@@ -109,9 +109,31 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> imple
                 filteredCars.addAll(allCars);
             }
             else {
-                for (Car car : allCars){
-                    if (car.getBrand().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                        filteredCars.add(car);
+                String text = constraint.toString().toLowerCase();
+
+                if (text.contains(" ")){
+                    int textElementSize = text.split(" ").length;
+                    if (textElementSize == 1){
+                        for (Car car : allCars){
+                            if (text.startsWith(car.getBrand().toLowerCase())) {
+                                filteredCars.add(car);
+                            }
+                        }
+                    }
+                    else if (textElementSize == 2){
+                        for (Car car : allCars){
+                            String carBrandAndModel = car.getBrand() + " " + car.getModel();
+                            if (carBrandAndModel.toLowerCase().startsWith(text)) {
+                                filteredCars.add(car);
+                            }
+                        }
+                    }
+                }
+                else {
+                    for (Car car : allCars){
+                        if (car.getBrand().toLowerCase().startsWith(text)) {
+                            filteredCars.add(car);
+                        }
                     }
                 }
             }
