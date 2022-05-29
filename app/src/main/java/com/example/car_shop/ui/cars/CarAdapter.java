@@ -47,7 +47,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
         Car car = cars.get(position);
         holder.binding.brand.setText("Марка: " + car.getBrand());
         holder.binding.model.setText("Модель: " + car.getModel());
-        holder.binding.price.setText("Цена: " + car.getPrice() + " сом");
+        holder.binding.price.setText("Цена: " + car.getPrice() + "$");
         holder.binding.carImg.setImageBitmap(BitmapFactory.decodeByteArray(car.getPhoto(), 0, car.getPhoto().length));
         holder.itemView.setOnClickListener(v -> {
             CarPageFragment carPageFragment = new CarPageFragment();

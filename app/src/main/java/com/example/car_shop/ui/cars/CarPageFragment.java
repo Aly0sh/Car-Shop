@@ -41,15 +41,15 @@ public class CarPageFragment extends Fragment {
         Car car = (Car) bundle.get("car");
 
         binding.imgSelector.setImageBitmap(BitmapFactory.decodeByteArray(car.getPhoto(), 0, car.getPhoto().length));
-        binding.brand.setText("Бренд:" + car.getBrand());
-        binding.model.setText("Модель:" + car.getModel());
-        binding.price.setText("Цена:" + car.getPrice());
+        binding.brand.setText("Бренд: " + car.getBrand());
+        binding.model.setText("Модель: " + car.getModel());
+        binding.price.setText("Цена: " + car.getPrice() + "$");
         binding.sellerPhone.setText(car.getSellerPhone());
         binding.showPhone.setOnClickListener(v -> {
-            binding.sellerPhone.setVisibility(View.VISIBLE);
+            binding.showSellerPhone.setVisibility(View.VISIBLE);
         });
         binding.sellerPhone.setOnClickListener(v -> {
-            if (binding.sellerPhone.getVisibility() == View.VISIBLE){
+            if (binding.showSellerPhone.getVisibility() == View.VISIBLE){
                 getContext().startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + car.getSellerPhone())));
             }
         });

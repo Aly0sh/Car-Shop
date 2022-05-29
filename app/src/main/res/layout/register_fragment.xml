@@ -4,101 +4,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/frame_style"
     tools:context=".ui.registerOrLogin.register.RegisterFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Регистрация"
-        android:textSize="40dp"
-        android:layout_marginTop="70dp"
-        />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="10dp">
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:background="#B096EA"
-            android:hint="Имя пользователя" />
+        android:layout_gravity="center"
+        app:cardBackgroundColor="#00000000"
+        app:cardElevation="0dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Регистрация"
+            android:textSize="40dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="50dp">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@drawable/input"
+                android:hint="Имя пользователя"
+                android:textAlignment="center" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp"
+            android:layout_marginTop="160dp"
+            android:layout_gravity="center_horizontal">
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@drawable/input"
+                android:textAlignment="center"
+                android:inputType="phone"
+                android:hint="Номер вашего телефона" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp"
+            android:layout_marginTop="230dp"
+            android:layout_gravity="center_horizontal">
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="300dp"
+                android:textAlignment="center"
+                android:inputType="textPassword"
+                android:layout_height="50dp"
+                android:background="@drawable/input"
+                android:hint="Придумайте пароль" />
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp"
+            android:layout_marginTop="300dp"
+            android:layout_gravity="center_horizontal">
+            <Spinner
+                android:id="@+id/role"
+                android:layout_width="300dp"
+                android:inputType="textPassword"
+                android:layout_height="50dp"
+                android:paddingLeft="15dp"
+                android:background="@drawable/input"
+                android:entries="@array/roles" />
+        </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="230dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="380dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/simple_button"
+            android:text="Зарегистрироваться"
+            />
+
+        <TextView
+            android:id="@+id/toLoginPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Авторизация"
+            android:layout_marginTop="450dp"
+            android:layout_gravity="center_horizontal"
+            />
     </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="220dp"
-        android:layout_gravity="center_horizontal">
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:background="#B096EA"
-            android:paddingLeft="15dp"
-            android:hint="Номер" />
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="290dp"
-        android:layout_gravity="center_horizontal">
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="300dp"
-            android:inputType="textPassword"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:background="#B096EA"
-            android:hint="Пароль" />
-    </androidx.cardview.widget.CardView>
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="360dp"
-        android:layout_gravity="center_horizontal">
-        <Spinner
-            android:id="@+id/role"
-            android:layout_width="300dp"
-            android:inputType="textPassword"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:background="#B096EA"
-            android:entries="@array/roles"/>
-    </androidx.cardview.widget.CardView>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/register"
-        android:layout_width="230dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="440dp"
-        android:layout_gravity="center_horizontal"
-        app:cornerRadius="10dp"
-        android:text="Зарегистрироваться"
-        />
-
-    <TextView
-        android:id="@+id/toLoginPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Авторизация"
-        android:layout_marginTop="510dp"
-        android:layout_gravity="center_horizontal"
-        />
 
 </FrameLayout>

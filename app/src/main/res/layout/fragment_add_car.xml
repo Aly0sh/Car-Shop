@@ -22,68 +22,48 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/car_upload"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Название бренда:"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="230dp"
-        />
-
     <EditText
         android:id="@+id/brand"
         android:textAlignment="center"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/input"
+        android:hint="Введите название марки"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="260dp"
         />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Название модели:"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="310dp"
-        />
-
     <EditText
         android:id="@+id/model"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/input"
         android:textAlignment="center"
+        android:hint="Введите название марки"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="340dp"
         />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Цена:"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="390dp"
-        />
-
     <EditText
         android:id="@+id/price"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:textAlignment="center"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="420dp"
+        android:hint="Введите цену ($)"
+        android:background="@drawable/input"
         android:inputType="number"
         />
 
     <Button
         android:id="@+id/insert"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Добавить"
+        android:layout_width="150dp"
+        android:background="@drawable/simple_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="500dp"/>
 

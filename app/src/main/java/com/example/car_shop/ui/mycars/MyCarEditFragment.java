@@ -1,5 +1,6 @@
 package com.example.car_shop.ui.mycars;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
+import com.example.car_shop.MainActivity;
 import com.example.car_shop.data.App;
 import com.example.car_shop.data.models.Car;
 import com.example.car_shop.data.room.AppDatabase;
@@ -32,6 +34,7 @@ public class MyCarEditFragment extends Fragment {
     private ActivityResultLauncher<String> content;
     private Bitmap bitmap;
     private boolean isImgSelected = false;
+    private Car car;
 
 
 
@@ -46,7 +49,7 @@ public class MyCarEditFragment extends Fragment {
         binding = FragmentMyCarEditBinding.inflate(getLayoutInflater());
 
         Bundle bundle = getArguments();
-        Car car = (Car) bundle.get("carEdit");
+        car = (Car) bundle.get("carEdit");
 
         binding.brand.setText(car.getBrand());
         binding.model.setText(car.getModel());
@@ -73,35 +76,42 @@ public class MyCarEditFragment extends Fragment {
             }
         });
 
-        binding.insert.setOnClickListener(view -> {
-            String brand = binding.brand.getText().toString();
-            String model = binding.model.getText().toString();
-            String strPrice = binding.price.getText().toString();
-            if (brand.isEmpty() || model.isEmpty() || strPrice.isEmpty()){
-                Toast.makeText(getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                if (isImgSelected){
-                    ByteArrayOutputStream baos =new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-                    byte[] img = baos.toByteArray();
-                    car.setPhoto(img);
-                }
-                car.setBrand(brand);
-                car.setModel(model);
-                car.setPrice(Integer.valueOf(strPrice));
-                AppDatabase appDatabase = App.getAppDatabase(getContext());
-                appDatabase.carDao().update(car);
-
-                MyCarsFragment carsFragment = new MyCarsFragment();
-                getFragmentManager()
-                        .beginTransaction()
-                        .disallowAddToBackStack()
-                        .replace(getId(), carsFragment, "car list")
-                        .commit();
-            }
-        });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.insert.setOnClickListener(view -> {
+            updateCar();
+        });
+    }
+
+    private void updateCar(){
+        String brand = binding.brand.getText().toString();
+        String model = binding.model.getText().toString();
+        String strPrice = binding.price.getText().toString();
+        if (brand.isEmpty() || model.isEmpty() || strPrice.isEmpty()){
+            Toast.makeText(getContext(), "Все поля должны быть заполнены", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (isImgSelected){
+                ByteArrayOutputStream baos =new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+                byte[] img = baos.toByteArray();
+                car.setPhoto(img);
+            }
+            car.setBrand(brand);
+            car.setModel(model);
+            car.setPrice(Integer.valueOf(strPrice));
+            AppDatabase appDatabase = App.getAppDatabase(getContext());
+            appDatabase.carDao().update(car);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
     }
 }
