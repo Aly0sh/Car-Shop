@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,15 +22,19 @@ import com.example.car_shop.databinding.CarItemLayoutBinding;
 import com.example.car_shop.userService.UserSingl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
+public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> implements Filterable {
     private List<Car> cars = new ArrayList<>();
+    private List<Car> allCars;
     private CarsFragment carsFragment;
     private CartDao cartDao;
 
     public void setList(List<Car> cars){
         this.cars = cars;
+        this.allCars = new ArrayList<>(cars);
         notifyDataSetChanged();
     }
 
@@ -92,6 +98,41 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> {
             super(itemView.getRoot());
             this.binding = itemView;
         }
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Car> filteredCars = new ArrayList<>();
+
+            if (constraint.toString().isEmpty()){
+                filteredCars.addAll(allCars);
+            }
+            else {
+                for (Car car : allCars){
+                    if (car.getBrand().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
+                        filteredCars.add(car);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredCars;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            cars.clear();
+            cars.addAll((Collection<? extends Car>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public boolean check(Car car) {
