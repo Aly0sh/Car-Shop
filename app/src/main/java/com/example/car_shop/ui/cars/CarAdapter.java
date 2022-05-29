@@ -24,6 +24,7 @@ import com.example.car_shop.userService.UserSingl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> implements Filterable {
@@ -115,7 +116,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> imple
                     int textElementSize = text.split(" ").length;
                     if (textElementSize == 1){
                         for (Car car : allCars){
-                            if (text.startsWith(car.getBrand().toLowerCase())) {
+                            if (text.contains(car.getBrand().toLowerCase()) || text.contains(car.getModel().toLowerCase())) {
                                 filteredCars.add(car);
                             }
                         }
@@ -123,7 +124,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> imple
                     else if (textElementSize == 2){
                         for (Car car : allCars){
                             String carBrandAndModel = car.getBrand() + " " + car.getModel();
-                            if (carBrandAndModel.toLowerCase().startsWith(text)) {
+                            if (carBrandAndModel.toLowerCase().contains(text)) {
                                 filteredCars.add(car);
                             }
                         }
@@ -131,7 +132,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> imple
                 }
                 else {
                     for (Car car : allCars){
-                        if (car.getBrand().toLowerCase().startsWith(text)) {
+                        if (car.getBrand().toLowerCase().contains(text) || car.getModel().toLowerCase().contains(text)) {
                             filteredCars.add(car);
                         }
                     }
