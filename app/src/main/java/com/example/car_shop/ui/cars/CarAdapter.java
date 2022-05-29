@@ -111,30 +111,10 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> imple
             }
             else {
                 String text = constraint.toString().toLowerCase();
-
-                if (text.contains(" ")){
-                    int textElementSize = text.split(" ").length;
-                    if (textElementSize == 1){
-                        for (Car car : allCars){
-                            if (text.contains(car.getBrand().toLowerCase()) || text.contains(car.getModel().toLowerCase())) {
-                                filteredCars.add(car);
-                            }
-                        }
-                    }
-                    else if (textElementSize == 2){
-                        for (Car car : allCars){
-                            String carBrandAndModel = car.getBrand() + " " + car.getModel();
-                            if (carBrandAndModel.toLowerCase().contains(text)) {
-                                filteredCars.add(car);
-                            }
-                        }
-                    }
-                }
-                else {
-                    for (Car car : allCars){
-                        if (car.getBrand().toLowerCase().contains(text) || car.getModel().toLowerCase().contains(text)) {
-                            filteredCars.add(car);
-                        }
+                for (Car car : allCars){
+                    String carBrandAndModel = car.getBrand() + " " + car.getModel();
+                    if (carBrandAndModel.toLowerCase().contains(text)) {
+                        filteredCars.add(car);
                     }
                 }
             }
