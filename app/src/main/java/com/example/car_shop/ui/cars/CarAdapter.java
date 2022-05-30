@@ -72,6 +72,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarHolder> imple
         });
         if (UserSingl.getUserSingln().getUserRole() == UserRoles.CLIENT){
             if (check(car)){
+                holder.binding.like.setImageDrawable(holder.binding.getRoot().getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24));
                 holder.binding.like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

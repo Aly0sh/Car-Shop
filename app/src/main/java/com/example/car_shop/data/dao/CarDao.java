@@ -15,7 +15,7 @@ import java.util.List;
 public interface CarDao {
 
 
-    @Query("SELECT * FROM Car")
+    @Query("SELECT * FROM Car WHERE car_status = 'SALE'")
     List<Car> getAll();
 
     @Query("SELECT * FROM Car WHERE userId = :userId")

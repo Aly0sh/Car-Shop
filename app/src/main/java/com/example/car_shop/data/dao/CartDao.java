@@ -24,7 +24,8 @@ public interface CartDao {
     @Query("SELECT * FROM cart WHERE carId = :carId AND userId = :userId")
     Cart getByCarId(long carId, long userId);
 
-
+    @Query("DELETE FROM cart WHERE carId = :carId")
+    void deleteByCarId(long carId);
 
     @Insert
     void insert(Cart cart);

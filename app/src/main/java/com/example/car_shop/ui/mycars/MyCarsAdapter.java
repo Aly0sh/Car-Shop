@@ -1,14 +1,21 @@
 package com.example.car_shop.ui.mycars;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
@@ -53,6 +60,9 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
     @Override
     public void onBindViewHolder(@NonNull MyCarsAdapter.CarHolder holder, int position) {
         Car car = cars.get(position);
+        if (car.getStatus() == Status.SOLD) {
+            holder.binding.mycart.setForeground(new ColorDrawable(Color.parseColor("#4D000000")));
+        }
         holder.binding.brand.setText(car.getBrand());
         holder.binding.model.setText("Модель: " + car.getModel());
         holder.binding.price.setText("Цена: " + car.getPrice() + " сом");
@@ -83,11 +93,36 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
                             case "Продано":
                                 carDao.updateStatus(Status.SOLD, car.getId());
                                 holder.binding.status.setText("Продано");
+                                holder.binding.mycart.setForeground(new ColorDrawable(Color.parseColor("#4D000000")));
                                 return true;
                             case "На продажу":
                                 carDao.updateStatus(Status.SALE, car.getId());
                                 holder.binding.status.setText("В продаже");
+                                holder.binding.mycart.setForeground(null);
                                 return true;
+                            case "Удалить":
+                                AlertDialog alertDialog = new AlertDialog.Builder(holder.binding.getRoot().getContext()).create();
+                                alertDialog.setTitle("Удаление машины из списка");
+                                alertDialog.setMessage("Вы действительно хотите удалить машину из списка?");
+                                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Удалить",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                cartDao.deleteByCarId(car.getId());
+                                                carDao.delete(car);
+                                                notifyDataSetChanged();
+                                                cars.remove(holder.getPosition());
+                                                MyCarsFragment.updateRecycler();
+                                                dialog.dismiss();
+                                            }
+                                        });
+
+                                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Отмена",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                alertDialog.show();
                         }
                         return false;
                     }
@@ -102,7 +137,11 @@ public class MyCarsAdapter extends RecyclerView.Adapter<MyCarsAdapter.CarHolder>
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getTitle().toString()){
                             case "Позвонить владельцу":
-                                holder.binding.getRoot().getContext().startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + car.getSellerPhone())));
+                                if (car.getStatus() == Status.SOLD){
+                                    Toast.makeText(holder.binding.getRoot().getContext(), "Машина уже продана вы не можете позвонить владельцу!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    holder.binding.getRoot().getContext().startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + car.getSellerPhone())));
+                                }
                                 return true;
                             case "Удалить понравившееся":
                                 cartDao.delete(cartDao.getByCarId(car.getId(), UserSingl.getUserSingln().getUserId()));
